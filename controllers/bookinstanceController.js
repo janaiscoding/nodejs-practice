@@ -7,7 +7,7 @@ const asyncHandler = require("express-async-handler");
 // Display list of all BookInstances.
 exports.bookinstance_list = asyncHandler(async (req, res, next) => {
   const allBookInstances = await BookInstance.find().populate("book").exec();
-
+  // allBookInstances.forEach((inst) => console.log(typeof(inst.book.title)))
   res.render("bookinstance_list", {
     title: "Book Instance List",
     bookinstance_list: allBookInstances,
@@ -26,7 +26,6 @@ exports.bookinstance_detail = asyncHandler(async (req, res, next) => {
     err.status = 404;
     return next(err);
   }
-
   res.render("bookinstance_detail", {
     title: "Book:",
     bookinstance: bookInstance,
